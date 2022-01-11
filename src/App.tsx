@@ -10,6 +10,7 @@ interface IPROPS {
 
 export default function App() {
   const [selectedCell, setSelectedCell] = useState({ row: 0, col: 0 });
+  const [hoveredCell, setHoveredCell] = useState({ row: 0, col: 0 });
 
   const Tile = (props: IPROPS) => {
     const { color, id, row, col } = props;
@@ -19,10 +20,11 @@ export default function App() {
         className={`${color} tile`}
         onClick={() => {
           setSelectedCell({ row, col });
+          setHoveredCell({ row, col });
         }}
-        // onMouseEnter={() => {
-        //   setSelectedCell({ row, col });
-        // }}
+        onMouseEnter={() => {
+          setHoveredCell({ row, col });
+        }}
       >
         {/* {id} */}
       </div>
@@ -35,7 +37,7 @@ export default function App() {
       let boardRow = [];
       for (let col = 1; col <= m; col++) {
         const color =
-          row <= selectedCell.row && col <= selectedCell.col ? "black" : "";
+          row <= hoveredCell.row && col <= hoveredCell.col ? "black" : "";
         boardRow.push(
           <Tile
             key={`${col}${row}`}
@@ -56,7 +58,7 @@ export default function App() {
   };
   return (
     <div className="App">
-      {createBoard(6, 9)}{" "}
+      {createBoard(6, 7)}{" "}
       <p>
         {selectedCell.row}*{selectedCell.col}
       </p>
