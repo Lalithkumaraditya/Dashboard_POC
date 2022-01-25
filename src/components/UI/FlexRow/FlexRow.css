@@ -1,21 +1,18 @@
 .container {
   margin: 20px;
-  display: grid;
-  width: 80%;
+  width: auto;
   overflow-x: auto;
 }
 .el1 {
   border: 1px;
+  width:100%;
   border-color: grey;
   border-style: dashed;
   border-radius: 12px;
-  padding: 25px;
+  padding: 0px;
   margin: 3px;
-  overflow: auto;
   resize: both;
-  width: auto;
-  min-width: min-content;
-  min-height: min-content;
+
 }
 
 #div1 {
@@ -24,3 +21,18 @@
   padding: 10px;
   /* border: 1px solid #aaaaaa; */
 }
+
+.validation{
+  border-color: red;
+}
+
+.gridContainer{
+  display: block;
+}
+
+.rowContainer{
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+}
+

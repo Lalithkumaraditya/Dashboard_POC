@@ -1,32 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Children } from "react";
 import "./App.css";
+import Container from "./components/UI/dnd/Container";
 import FlexRow from "./components/UI/FlexRow/FlexRow";
 interface IPROPS {
   color: string;
   id: string;
   row: number;
   col: number;
+  grid?:Array<any>;
 }
-
 export default function App() {
+  
   const [selectedCell, setSelectedCell] = useState({ row: 0, col: 0 });
   const [hoveredCell, setHoveredCell] = useState({ row: 0, col: 0 });
+  const [grid, setGrid] = useState([]);
+  
+  
+  // Ref
+  const refCell = useRef<(HTMLParagraphElement|any)>();
 
   const Tile = (props: IPROPS) => {
     const { color, id, row, col } = props;
     return (
       <div
+       
         id={id}
         className={`${color} tile`}
         onClick={() => {
           setSelectedCell({ row, col });
           setHoveredCell({ row, col });
+          let totalSelection: any = [...grid, { row, col }];
+          setGrid(totalSelection);
         }}
+        
         onMouseEnter={() => {
           setHoveredCell({ row, col });
         }}
       >
-        {/* {id} */}
       </div>
     );
   };
@@ -56,13 +66,17 @@ export default function App() {
     }
     return board;
   };
+
   return (
     <div className="App">
       {createBoard(6, 7)}{" "}
+      {JSON.stringify(grid)}
+      
       <p>
         {selectedCell.row}*{selectedCell.col}
       </p>
-      <FlexRow col={selectedCell.col} row={selectedCell.row} />
+      <FlexRow col={selectedCell.col} row={selectedCell.row} grid={grid}/>
+      
     </div>
   );
 }
