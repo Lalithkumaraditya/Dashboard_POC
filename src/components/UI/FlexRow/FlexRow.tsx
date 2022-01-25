@@ -7,7 +7,7 @@ import Container from "../dnd/Container";
 import { useDrag, useDrop } from "react-dnd";
 import ItemType from "./ItemTypes";
 /*Interface Declaration */
-// New grid
+
 interface COLPROPS {
   col: number;
   row: number;
